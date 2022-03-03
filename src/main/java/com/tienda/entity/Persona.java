@@ -1,16 +1,16 @@
 package com.tienda.entity;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "personas")
+@Entity // definiendo que la clase persona es una entidad
+@Table(name = "personas") //que hace consultas a la tabla personas
 public class Persona implements Serializable {
 
     @Id
@@ -21,7 +21,7 @@ public class Persona implements Serializable {
     private String telefono;
     private String email;
     @ManyToOne
-    @JoinColumn("paises_id")
+    @JoinColumn (name="paises_id")
     private Pais pais; 
 
     public Long getId() {
