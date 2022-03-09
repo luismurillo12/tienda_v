@@ -16,13 +16,15 @@ public class Persona implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)//se va a ingresando los datos
     private Long id;
+    private String nombre; 
     private String apellido1;
     private String apellido2;
     private String telefono;
     private String email;
-    @ManyToOne
-    @JoinColumn (name="paises_id")
-    private Pais pais; 
+    
+    @ManyToOne//estamos haciendo una relacion de un a muchos 
+    @JoinColumn (name="paises_id")//para indicar que mi paises id es una Llave foranea, AQUI
+    private Pais pais; //que lo va a obtener de mi clase pais y va a guardar mi id de pais 
 
     public Long getId() {
         return id;
@@ -30,6 +32,14 @@ public class Persona implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getApellido1() {

@@ -10,19 +10,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author luisn
- */
-@Service
+
+@Service //Para saber que es un servcio
 public class PersonaService implements IPersonaService{
-    
+    //Nos permite hacer una inyeccion de depencias 
     @Autowired
-    private PersonaRepository personaRepository; 
+    private PersonaRepository personaRepository; //instanciamos la personaRepository 
 
     @Override
     public List<Persona> getAllPersona() {
-        return(List<Persona>)personaRepository.findAll();
+        return(List<Persona>)personaRepository.findAll();// nos devulve una lista de persona por nuestro repositorio
+        //esto se optiene de CrudRepository
     }
 
     @Override

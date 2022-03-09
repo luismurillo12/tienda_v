@@ -14,20 +14,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class PersonaController {
 
-    @Autowired
+    @Autowired //inyectamos la interface donde estan los metodos, este caso esto es nuestro Service
     private IPersonaService personaService;
 
     @GetMapping({"/personas"})
-    public String index(Model model) {
+    public String index(Model model) { //nos hace un objeto de tipo model
         List<Persona> listaPersona = personaService.getAllPersona();//nos devuelve una lista de persona
-        model.addAttribute("titule", "Personas");
-        model.addAttribute("personas", listaPersona);
-        return "personas";
+        //esto nos va a permitir que la informacion que tenemos nosotros queramos agrgar a nuestro html se la podamos pasar
+        model.addAttribute("titule", "Personas");//cuando el encuntre un titulo lo va a cambiar por una persona
+        model.addAttribute("personas", listaPersona);//cuando encuente uno de persona va a cambiarlo por una lista
+        return "persona";
     }
 
     @GetMapping("/personasN")
     public String crearPersona(Model model) {
-        model.addAttribute("personas", new Persona());
+        model.addAttribute("personas", new Persona());//donde vea personas el va a crear un objecto de tipo persona
         return "crear";
     }
 
