@@ -6,6 +6,7 @@ package com.tienda.service;
 
 import com.tienda.entity.Persona;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -13,8 +14,8 @@ import java.util.List;
  */
 public interface IPersonaService {
     public List<Persona> getAllPersona();//nos devuelve una lista de personas 
-    public void savePersona(Persona persona); //guardamos a una persona 
-    public Persona getPersonaById(long id); //le pasamos el id de la persona y esto nos devuelve una persona 
+    public int savePersona(Persona persona); //guardamos a una persona 
+    public Optional<Persona> getPersonaById(long id); //le pasamos el id de la persona y esto nos devuelve una persona 
     public void delete(long id); //le pasamos el id y no elimia por medio de este 
     
 }

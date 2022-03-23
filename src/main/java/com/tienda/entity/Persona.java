@@ -25,6 +25,7 @@ public class Persona implements Serializable {
     @ManyToOne//estamos haciendo una relacion de un a muchos 
     @JoinColumn (name="paises_id")//para indicar que mi paises id es una Llave foranea, AQUI
     private Pais pais; //que lo va a obtener de mi clase pais y va a guardar mi id de pais 
+    
 
     public Long getId() {
         return id;
@@ -74,6 +75,12 @@ public class Persona implements Serializable {
         this.email = email;
     }
 
-   
+    public Pais getPais() {
+        return pais;
+    }
+
+    public void setPais(Pais pais) {
+        this.pais = pais;
+    }
 
 }

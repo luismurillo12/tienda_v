@@ -1,8 +1,11 @@
 package com.tienda.controller;
 
+import com.tienda.entity.Pais;
 import com.tienda.entity.Persona;
+import com.tienda.service.IPaisService;
 import com.tienda.service.IPersonaService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +19,8 @@ public class PersonaController {
 
     @Autowired //inyectamos la interface donde estan los metodos, este caso esto es nuestro Service
     private IPersonaService personaService;
+    @Autowired
+    private IPaisService paisService; 
 
     @GetMapping({"/personas"})
     public String index(Model model) { //nos hace un objeto de tipo model
@@ -28,20 +33,31 @@ public class PersonaController {
 
     @GetMapping("/personasN")
     public String crearPersona(Model model) {
+        List<Pais> listaPais= paisService.listaCountry(); 
         model.addAttribute("personas", new Persona());//donde vea personas el va a crear un objecto de tipo persona
+        model.addAttribute("paises", listaPais); 
         return "crear";
     }
 
     @PostMapping("/save")
     public String guardarPersona(@ModelAttribute Persona persona) {
         personaService.savePersona(persona);
-        return "redirect:/persona";
+        return "redirect:/personas";
+    }
+    
+    @GetMapping("/editPersona/{id}")
+    public String editarPersona(@PathVariable("id") Long idPersona, Model model) {
+        Optional<Persona> persona= personaService.getPersonaById(idPersona);
+        List<Pais> listaPais= paisService.listaCountry(); 
+        model.addAttribute("personas", persona);
+        model.addAttribute("paises", listaPais); 
+        return "crear";
     }
 
     @GetMapping("/delete/{id}")
-    public String eliminarPersona(@PathVariable("id") Long idPerosna) {
+    public String eliminarPersona(@PathVariable("id") Long idPersona, Model model) {
 
-        personaService.delete(idPerosna);
+        personaService.delete(idPersona);
         return "redirect: /persona";
 
     }

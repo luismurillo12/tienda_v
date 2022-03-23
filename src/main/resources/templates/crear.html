@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="plantilla/template::head">
+
+    </head>
+    <body>
+        <header th:replace="plantilla/template::header"></header>
+        
+        <!-- Formulario -->
+        <h1>Nuevo Persona</h1>
+        <a th:href="@{/}"></a>
+        <br>
+
+        <form th:action="@{/save}" method="post" th:object="${personas}">
+            <input type="hidden" th:field="*{id}">
+            <label for="nombre"> Nombre </label>
+            <input type="text" name="nombre" th:field="*{nombre}">
+            <br>
+            <label for="apellido1"> Apellido 1: </label>
+            <input type="text" name="apellido1" th:field="*{apellido1}">
+            <br>
+            <label for="apellido2"> Apellido 2: </label>
+            <input type="text" name="apellido2" th:field="*{apellido2}">
+            <br>
+            <label for="telefono"> Telefono: </label>
+            <input type="text" name="telefono" th:field="*{telefono}">
+            <br>
+            <label for="email"> email: </label>
+            <input type="text" name="email" th:field="*{email}">
+            <label for="pais"> Pais: </label>
+            <select th:field="*{pais}">
+                <option th:each="x:${paises}"
+                        th:value="${x.id}"
+                        th:text="${x.pais}"/>
+                
+            </select>
+
+            <button type="submit" value="Guardar"> Guardar Concierto</button>
+        </form>
+        <footer th:replace="plantilla/template::footer"></footer>
+    </body>
+</html>
+
