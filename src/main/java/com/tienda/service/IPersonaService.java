@@ -17,5 +17,6 @@ public interface IPersonaService {
     public int savePersona(Persona persona); //guardamos a una persona 
     public Optional<Persona> getPersonaById(long id); //le pasamos el id de la persona y esto nos devuelve una persona 
     public void delete(long id); //le pasamos el id y no elimia por medio de este 
+    public Persona findByNombre(String nombre);
     
 }
