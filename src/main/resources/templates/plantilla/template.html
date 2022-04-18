@@ -54,6 +54,12 @@
             <div>
                 <p>Copyright Tienda &copy; 2022</p>
             </div>
-        </footer>
-    </body>
-</html>
+
+            <a th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}"
+               th:href="${urlBuilder.replaceQueryParam('lang','es').toUriString()}">ES<a>
+                    <a th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}"
+                       th:href="${urlBuilder.replaceQueryParam('lang','en').toUriString()}">EN<a>
+                            </div>
+                            </footer>
+                            </body>
+        </html>

@@ -5,6 +5,7 @@
 package com.tienda;
 
 import com.tienda.service.UserService;
+import com.tienda.service.Userprincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -23,6 +25,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserService userDetailsService;
+    
+    @Bean
+    public UserDetailsService userDetailsService(){
+    return new UserService(); 
+    }
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -59,6 +66,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .hasAnyRole("USER", "VENDEDOR", "ADMIN")
                 .and()
                 .formLogin()
+                .loginPage("/login") 
+                .usernameParameter("nombre")
                 .loginProcessingUrl("/signin").permitAll();
     }
 //El siguiente método funciona parsa realizar la autorización de accesos

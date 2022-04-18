@@ -41,7 +41,7 @@ public class PersonaService implements IPersonaService{
 
     @Override
     public void delete(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       personaRepository.deleteById(id);
     }
 
     @Override

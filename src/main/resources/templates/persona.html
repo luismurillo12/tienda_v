@@ -4,7 +4,7 @@
 
     </head>
     <body style="background-color: #00D3A3" >
-     
+
         <header th:replace="plantilla/template::header"></header>
         <h1 th:text="${titulo}"></h1>
 
@@ -14,14 +14,15 @@
 
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Nombre </th>
-                    <th scope="col">Apellido 1 </th>
-                    <th scope="col">Apellido 2 </th>
-                    <th scope="col">Email </th>
-                    <th scope="col">Telefono </th>
-                    <th scope="col">Pais </th>
-                    <th scope="col">Editar</th>
-                    <th scope="col">Eliminar</th>
+                    <th scope="col" th:text="#{columna.nombre}">Nombre </th>
+                    <th scope="col"  th:text="#{columna.ape1}">Apellido 1 </th>
+                    <th scope="col" th:text="#{columna.ape2}">Apellido 2 </th>
+                    <th scope="col" th:text="#{columna.correo}">Email </th>
+                    <th scope="col" th:text="#{columna.tele}">Telefono </th>
+                    <th scope="col" th:text="#{columna.pais}">Pais </th>
+                    <th scope="col" th:text="#{columna.edi}">Editar</th>
+                    <th scope="col" th:text="#{columna.eli}">Eliminar</th>
+                    <th scope="col" th:text="#{columna.agre}">Agregar</th>
                 </tr>
             </thead>
 
@@ -43,10 +44,27 @@
                     <td>
                         <a th:href="@{/delete/{id}(id=${user.getId})}">Delete</a>
                     </td>
+                    <td>
+                        <a th:href="@{/personasN/agregar}"> Agregar persona</a>
+                    </td>
                 </tr>
             </th:block>
+
+
         </tbody>
 
-    </table>
-</body>
-</html>
+        <footer th:fragment="footer" class="bg-dark text-white fixed-bottom">
+            <div>
+                <p>Copyright Tienda &copy; 2022</p>
+            </div>
+
+            <a th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}"
+               th:href="${urlBuilder.replaceQueryParam('lang','es').toUriString()}">ES<a>
+                    <a th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}"
+                       th:href="${urlBuilder.replaceQueryParam('lang','en').toUriString()}">EN<a>
+                            </div>
+                            </footer>
+
+                            </table>
+                            </body>
+                            </html>

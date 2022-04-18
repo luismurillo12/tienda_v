@@ -31,7 +31,7 @@ public class PersonaController {
         return "persona";
     }
 
-    @GetMapping("/personasN")
+    @GetMapping("/personasN/agregar")
     public String crearPersona(Model model) {
         List<Pais> listaPais= paisService.listaCountry(); 
         model.addAttribute("personas", new Persona());//donde vea personas el va a crear un objecto de tipo persona
@@ -58,7 +58,8 @@ public class PersonaController {
     public String eliminarPersona(@PathVariable("id") Long idPersona, Model model) {
 
         personaService.delete(idPersona);
-        return "redirect: /persona";
+        return "redirect:/persona";
 
     }
+
 }

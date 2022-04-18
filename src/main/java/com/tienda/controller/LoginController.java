@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Slf4j
 public class LoginController {
 
-    @GetMapping({"/", "/perro"}) // Para que nos diriga a la pagina principal por medio de / o de /perro
+    @GetMapping("/login") // Para que nos diriga a la pagina principal por medio de / o de /perro
     public String index() { //se ejecute esto que esta aqui 
         return "login";
 
