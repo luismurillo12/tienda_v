@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.tienda;
 
 import com.tienda.service.UserService;
@@ -25,10 +21,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserService userDetailsService;
-    
+
     @Bean
-    public UserDetailsService userDetailsService(){
-    return new UserService(); 
+    public UserDetailsService userDetailsService() {
+        return new UserService();
     }
 
     @Bean
@@ -37,10 +33,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-   public DaoAuthenticationProvider authenticationProvider() {
+    public UserService getUserService() {
+        return new UserService();
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-        daoAuthenticationProvider.setUserDetailsService(this.userDetailsService);
+        daoAuthenticationProvider.setUserDetailsService(getUserService());
 
         return daoAuthenticationProvider;
     }
@@ -58,17 +59,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/persona")
+                .antMatchers("/personas", "/login")
                 .hasRole("ADMIN")
-                .antMatchers("/personasN", "/persona")
+                .antMatchers("/personasN", "/personas", "/", "/login")
                 .hasAnyRole("USER", "VENDEDOR", "ADMIN")
-                .antMatchers("/")
-                .hasAnyRole("USER", "VENDEDOR", "ADMIN")
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login") 
-                .usernameParameter("nombre")
-                .loginProcessingUrl("/signin").permitAll();
+                .loginPage("/login").permitAll().defaultSuccessUrl("/personas", true);
     }
 //El siguiente método funciona parsa realizar la autorización de accesos
 }
